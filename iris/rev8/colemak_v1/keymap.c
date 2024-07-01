@@ -32,34 +32,34 @@
 
 enum layers {
     DEF,
-    GAME1,
-    GAME2,
+    GA1,
+    GA2,
     SYM,
     NAV,
     NUM,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[_DEF] = LAYOUT(
+	[DEF] = LAYOUT(
         QK_GESC, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB,  KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                   KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_DEL ,
         _______, KC_A   , C_MTLAR, C_MTLSS, C_MTLCT, KC_G   ,                   KC_M   , C_MTRCN, C_MTRSE, C_MTLAI, KC_O   , KC_QUOT,
-        TO(1),   KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT,  KC_SLSH, _______,
-                                            KC_LGUI, MO(3)  , KC_ENT , KC_SPC , MO(4)  , KC_RALT
+        DF(GA1), KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT,  KC_SLSH, _______,
+                                            KC_LGUI, MO(SYM), KC_ENT , KC_SPC , MO(NAV), KC_RALT
     ),
-	[GAME1] = LAYOUT(
+	[GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                   KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL ,
         KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                   KC_H   , C_MTRCJ, C_MTRSK, C_MTLAL, KC_SCLN, KC_QUOT,
-        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , MO(2)  , KC_END , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, TO(0)  ,
-                                            KC_LGUI, KC_LALT, KC_ENT , KC_SPC , MO(3)  , KC_RALT
+        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , MO(GA2), _______, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, DF(DEF),
+                                            KC_LGUI, KC_LALT, KC_ENT , KC_SPC , MO(NAV), KC_RALT
     ),
-	[GAME2] = LAYOUT(
+	[GA2] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB , KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   ,                   KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL ,
         KC_LSFT, KC_H   , KC_J   , KC_K   , KC_L   , KC_G   ,                   KC_H   , C_MTRCJ, C_MTRSK, C_MTLAL, KC_SCLN, KC_QUOT, 
-        KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, KC_END , KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, TO(0), 
-                                            KC_LGUI, KC_LALT, KC_ENT , KC_SPC , MO(3)  , KC_RALT
+        KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, _______ ,KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, DF(DEF), 
+                                            KC_LGUI, KC_LALT, KC_ENT , KC_SPC , MO(NAV), KC_RALT
     ),
 	[SYM] = LAYOUT(
         C_LSGR , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_BSPC, 
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 	[NAV] = LAYOUT(
         KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                   KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-        _______, KC_NUM , KC_HOME, KC_UP  , KC_END , KC_PGUP,                   _______, _______, _______, _______, _______, EE_CLR , 
+        _______, KC_NUM , KC_HOME, KC_UP  , _______, KC_PGUP,                   _______, _______, _______, _______, _______, EE_CLR , 
         _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_MPRV, C_MTCMN, C_MTCVU, KC_LALT, _______, _______, 
         KC_MUTE, _______, _______, _______, _______, _______, _______, _______, KC_MSTP, KC_MPLY, KC_VOLD, _______, _______, _______, 
                                             _______, _______, _______, _______, _______, _______
@@ -79,13 +79,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(0)  , 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(DEF)  , 
                                             _______, _______, _______, _______, _______, _______
     )
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-   return update_tri_layer_state(state, SYM, NAV, _ADJUST);
+   return update_tri_layer_state(state, SYM, NAV, NUM);
 }
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
