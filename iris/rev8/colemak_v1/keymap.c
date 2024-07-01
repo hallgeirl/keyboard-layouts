@@ -21,8 +21,6 @@
 #define C_MTLAL MT(MOD_LALT,KC_L)
 
 // Symbol layer
-#define C_LSGR LSFT(KC_GRV)
-
 #define C_MTRC5 MT(MOD_RCTL,KC_P5)
 #define C_MTRS6 MT(MOD_RSFT,KC_P6)
 
@@ -62,10 +60,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_LGUI, KC_LALT, KC_ENT , KC_SPC , MO(NAV), KC_RALT
     ),
 	[SYM] = LAYOUT(
-        C_LSGR , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_BSPC, 
-        KC_GRV , _______, _______, _______, _______, _______,                   _______, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, KC_DEL, 
-        _______, _______, KC_LALT, KC_LSFT, KC_LCTL, _______,                   _______, KC_RCTL, KC_RSFT, KC_LALT, KC_EQL , KC_BSLS,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_MINS, _______,
+        _______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_BSPC, 
+        _______, KC_GRV, _______, _______, _______, _______,                    _______, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, KC_DEL, 
+        _______, KC_TILD, KC_LALT, KC_LSFT, KC_LCTL, _______,                   _______, KC_RCTL, KC_RSFT, KC_LALT, KC_EQL , KC_BSLS,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_MINS, KC_PIPE,
                                             _______, _______, _______, _______, _______, _______
     ),
 	[NAV] = LAYOUT(
