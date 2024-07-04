@@ -13,6 +13,13 @@
 #define LA_NAV MO(NAV)
 
 // Base layer home row mods
+#define C_MTLAW MT(MOD_LALT,KC_W)
+#define C_MTLGF MT(MOD_LGUI,KC_F)
+#define C_MTLCP MT(MOD_LCTL,KC_P)
+#define C_MTRCL MT(MOD_RCTL,KC_L)
+#define C_MTRGU MT(MOD_RGUI,KC_U)
+#define C_MTLAY MT(MOD_LALT,KC_Y)
+
 #define C_MTLAR MT(MOD_LALT,KC_R)
 #define C_MTLSS MT(MOD_LSFT,KC_S)
 #define C_MTLCT MT(MOD_LCTL,KC_T)
@@ -51,10 +58,10 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[DEF] = LAYOUT(
         QK_GESC, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
-        KC_TAB,  KC_Q   , KC_W   , KC_F   , KC_P   , KC_B   ,                   KC_J   , KC_L   , KC_U   , KC_Y   , KC_SCLN, KC_DEL ,
-        _______, KC_A   , C_MTLAR, C_MTLSS, C_MTLCT, KC_G   ,                   KC_M   , C_MTRCN, C_MTRSE, C_MTLAI, KC_O   , KC_QUOT,
-        DF(GA1), KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT,  KC_SLSH, _______,
-                                            KC_LGUI, MO(SYM), KC_ENT , KC_SPC , MO(NAV), KC_RALT
+        KC_TAB,  KC_Q   , C_MTLAW, C_MTLGF, C_MTLCP, KC_B   ,                   KC_J   , C_MTRCL, C_MTRGU, C_MTLAY, KC_SCLN, KC_DEL ,
+        _______, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
+        DF(GA1), KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
+                                            KC_LSFT, MO(NAV), KC_ENT , KC_SPC , MO(SYM), KC_RALT
     ),
 	[GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
