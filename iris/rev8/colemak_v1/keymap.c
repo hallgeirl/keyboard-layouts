@@ -11,6 +11,7 @@
 
 #define LA_SYM MO(_SYM)
 #define LA_NAV MO(_NAV)
+#define LA_GA1 DF(_GA1)
 #define MT_SENT MT(MOD_LSFT, KC_ENT)
 
 
@@ -76,9 +77,9 @@ enum keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEF] = LAYOUT(
         QK_GESC, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
-        KC_TAB,  KC_Q   , C_MTLAW, C_MTLGF, C_MTLCP, KC_B   ,                   KC_J   , C_MTRCL, C_MTRGU, C_MTLAY, TH_SCLN, KC_DEL ,
+        KC_TAB , KC_Q   , C_MTLAW, C_MTLGF, C_MTLCP, KC_B   ,                   KC_J   , C_MTRCL, C_MTRGU, C_MTLAY, TH_SCLN, KC_DEL ,
         _______, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , TH_O   , TH_QUOT,
-       DF(_GA1), KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
+        LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
                                             KC_LSFT, LA_NAV , KC_ENT , KC_SPC , LA_SYM, KC_RSFT
     ),
 	[_GA1] = LAYOUT(
@@ -111,9 +112,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 	[_NUM] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, TO(_DEF)  , 
+        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, 
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_F12,                    KC_F11,  _______, _______, _______, _______, _______,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  TO(_DEF)  , 
                                             _______, _______, _______, _______, _______, _______
     )
 };
@@ -148,6 +149,11 @@ bool sw_win_active = false;
 bool sw_pwin_active = false;
 bool sw_lang_active = false;
 
+oneshot_state os_shft_state = os_up_unqueued;
+oneshot_state os_ctrl_state = os_up_unqueued;
+oneshot_state os_alt_state = os_up_unqueued;
+oneshot_state os_cmd_state = os_up_unqueued;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TH_SCLN:
@@ -180,6 +186,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keycode, record
     );
 
+    update_oneshot(
+        &os_shft_state, KC_LSFT, OS_SHFT,
+        keycode, record
+    );
+
+    update_oneshot(
+        &os_ctrl_state, KC_LCTL, OS_CTRL,
+        keycode, record
+    );
+
+    update_oneshot(
+        &os_alt_state, KC_LALT, OS_ALT,
+        keycode, record
+    );
+
+    update_oneshot(
+        &os_cmd_state, KC_LCMD, OS_CMD,
+        keycode, record
+    );
     return true;
 }
 
@@ -192,7 +217,4 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
-
-
-
 
