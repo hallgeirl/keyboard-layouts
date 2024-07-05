@@ -12,6 +12,11 @@
 #define LA_SYM MO(SYM)
 #define LA_NAV MO(NAV)
 
+// Tap-hold config (see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
+#define TH_SCLN LT(0, KC_SCLN)
+#define TH_O LT(0, KC_O)
+#define TH_QUOT LT(0, KC_QUOT)
+
 // Base layer home row mods
 #define C_MTLAW MT(MOD_LALT,KC_W)
 #define C_MTLGF MT(MOD_LGUI,KC_F)
@@ -58,8 +63,8 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[DEF] = LAYOUT(
         QK_GESC, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
-        KC_TAB,  KC_Q   , C_MTLAW, C_MTLGF, C_MTLCP, KC_B   ,                   KC_J   , C_MTRCL, C_MTRGU, C_MTLAY, KC_SCLN, KC_DEL ,
-        _______, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
+        KC_TAB,  KC_Q   , C_MTLAW, C_MTLGF, C_MTLCP, KC_B   ,                   KC_J   , C_MTRCL, C_MTRGU, C_MTLAY, TH_SCLN, KC_DEL ,
+        _______, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , TH_O   , TH_QUOT,
         DF(GA1), KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
                                             KC_LSFT, MO(NAV), KC_ENT , KC_SPC , MO(SYM), KC_RALT
     ),
@@ -99,6 +104,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______, _______, _______, _______
     )
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TH_SCLN:
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_W)); // Å
+                return false;
+            }
+            return true;             // Return true for normal processing of tap keycode
+        case TH_O:
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_L)); // ø
+                return false;
+            }
+            return true;             // Return true for normal processing of tap keycode
+        case TH_QUOT:
+            if (!record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_Z)); // æ
+                return false;
+            }
+            return true;             // Return true for normal processing of tap keycode
+    }
+    return true;
+}
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
