@@ -82,14 +82,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB , KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_DOT ,                   KC_AMPR, _______, KC_LPRN, KC_RPRN, KC_PERC, KC_DEL ,
         _______, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL , KC_HASH,                   KC_PIPE, KC_COLN, KC_LBRC, KC_RBRC, KC_QUES, _______,
         _______, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, _______, _______, _______, KC_TILD, KC_DLR , KC_LCBR, KC_RCBR, KC_UNDS, _______,
-                                            _______, _______, _______, _______, _______, _______
+                                            KC_LSFT, _______, _______, _______, _______, _______
     ),
 	[NAV] = LAYOUT(
         KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                   KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
         _______, KC_HOME, CTLLEFT, KC_UP  , CTLRGHT ,KC_END ,                   _______, KC_RCTL, KC_RGUI, KC_LALT, KC_PSCR, EE_CLR , 
         _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP,                   KC_MPRV, KC_MNXT, KC_VOLU, _______, _______, QK_BOOT, 
         _______, _______, _______, _______, _______, KC_PGDN, _______, _______, KC_MSTP, KC_MPLY, KC_VOLD, _______, _______, RGB_TOG, 
-                                            _______, _______, _______, _______, _______, _______
+                                            _______, _______, _______, _______, _______, KC_RSFT
     ),
 	[NUM] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
