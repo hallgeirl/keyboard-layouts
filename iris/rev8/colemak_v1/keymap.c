@@ -93,15 +93,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB , KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   ,                   KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL ,
         KC_LSFT, KC_H   , KC_J   , KC_K   , KC_L   , KC_G   ,                   KC_H   , C_MTRCJ, C_MTRSK, C_MTLAL, KC_SCLN, KC_QUOT, 
-        KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, _______ ,KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, DF(_DEF), 
-                                            KC_LGUI, KC_LALT, KC_ENT , KC_SPC , LA_NAV, KC_RALT
+        KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, _______, KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, DF(_DEF), 
+                                            _______, _______, _______, _______, _______, _______
     ),
     [_SYM] = LAYOUT(
         KC_GRV , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_BSPC, 
         KC_TAB , KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_DOT ,                   KC_AMPR, _______, KC_LPRN, KC_RPRN, KC_PERC, KC_DEL ,
         _______, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL , KC_HASH,                   KC_PIPE, KC_COLN, KC_LBRC, KC_RBRC, KC_QUES, _______,
         _______, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, _______, _______, _______, KC_TILD, KC_DLR , KC_LCBR, KC_RCBR, KC_UNDS, _______,
-                                            KC_LSFT, _______, _______, _______, _______, _______
+                                            _______, _______, _______, _______, _______, _______
     ),
 	[_NAV] = LAYOUT(
         KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                   KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
@@ -119,7 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-
+/*
+    Callum's one-shot and swapper implementations (with some modifications)
+*/
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
     case LA_SYM:
@@ -155,6 +157,9 @@ oneshot_state os_alt_state = os_up_unqueued;
 oneshot_state os_cmd_state = os_up_unqueued;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    /*
+        Tap-hold implementation
+    */
     switch (keycode) {
         case TH_SCLN:
             if (!record->tap.count && record->event.pressed) {
@@ -176,6 +181,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;             // Return true for normal processing of tap keycode
     }
     
+    /*
+        Swapper implementation
+    */
     update_swapper(
         &sw_win_active, KC_LALT, KC_TAB, SW_WIN,
         keycode, record
@@ -186,6 +194,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keycode, record
     );
 
+    /*
+        One-shot modifiers implementation
+    */
     update_oneshot(
         &os_shft_state, KC_LSFT, OS_SHFT,
         keycode, record
@@ -208,8 +219,70 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+/*
+  RGB config
+*/
+
+const int led_count = RGB_MATRIX_LED_COUNT;
+int       layer_leds[]    = {0/*DEF*/, 2/*GA1*/, 3/*GA2*/, 5/*SYM*/, 6/*NAV*/, 8/*NUM*/};
+const int lgui_led = 16,
+          lalt_led = 17,
+          lsft_led = 18,
+          lctl_led = 19;
+
+
+void keyboard_post_init_user(void) {
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+}
+
+void set_rgblight_by_layer(uint32_t layer) {
+        switch (layer) {
+            case _DEF:            
+                break;
+            default:
+                rgb_matrix_set_color(layer_leds[layer], RGB_RED);
+                break;
+        }
+}
+
+void set_current_layer_rgb(void) {
+    set_rgblight_by_layer(get_highest_layer(layer_state | default_layer_state));
+}
+
+
+
+bool rgb_matrix_indicators_user(void) {
+    rgb_matrix_set_color_all(0,0,0);
+    uint8_t mods                = get_mods();
+    //uint8_t oneshot_mods        = get_oneshot_mods();
+    //uint8_t oneshot_locked_mods = get_oneshot_locked_mods();
+
+    bool isShift = mods & MOD_MASK_SHIFT;// || oneshot_mods & MOD_MASK_SHIFT || oneshot_locked_mods & MOD_MASK_SHIFT;
+    bool isCtrl  = mods & MOD_MASK_CTRL;// || oneshot_mods & MOD_MASK_CTRL || oneshot_locked_mods & MOD_MASK_CTRL;
+    bool isAlt   = mods & MOD_MASK_ALT;// || oneshot_mods & MOD_MASK_ALT || oneshot_locked_mods & MOD_MASK_ALT;
+    bool isGui   = mods & MOD_MASK_GUI;// || oneshot_mods & MOD_MASK_GUI || oneshot_locked_mods & MOD_MASK_GUI;
+
+    if (isGui) {
+        rgb_matrix_set_color(lgui_led, RGB_RED);
+    }
+    if (isAlt) {
+        rgb_matrix_set_color(lalt_led, RGB_RED);
+    }
+    if (isShift) {
+        rgb_matrix_set_color(lsft_led, RGB_RED);
+    }
+    if (isCtrl) {
+        rgb_matrix_set_color(lctl_led, RGB_RED);
+    }
+   // rgb_matrix_set_color(5, RGB_RED);
+
+    set_current_layer_rgb();
+    return false;
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-   return update_tri_layer_state(state, _SYM, _NAV, _NUM);
+    return update_tri_layer_state(state, _SYM, _NAV, _NUM);
 }
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
@@ -217,4 +290,3 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
-
