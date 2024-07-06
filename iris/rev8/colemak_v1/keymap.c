@@ -263,8 +263,10 @@ void keyboard_post_init_user(void) {
 
 void set_rgblight_by_layer(uint32_t layer) {
         switch (layer) {
-            case _DEF:            
+            case _DEF:
+                break;            
             case _SYS:
+                rgb_matrix_set_color_all(RGB_RED);
                 break;
             default:
                 rgb_matrix_set_color(layer_leds[layer], RGB_RED);
