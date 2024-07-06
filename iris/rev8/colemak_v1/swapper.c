@@ -30,16 +30,21 @@ void update_dual_swapper(
     uint16_t cmdish1,
     uint16_t cmdish2,
     uint16_t tabish,
-    uint16_t trigger,
+    uint16_t trigger_next,  
+    uint16_t trigger_prev,
     uint16_t keycode,
     keyrecord_t *record
 ) {
-    if (keycode == trigger) {
+    if (keycode == trigger_next || keycode == trigger_prev) {
         if (record->event.pressed) {
             if (!*active) {
                 *active = true;
                 register_code(cmdish1);
-                register_code(cmdish2);
+            }
+            if (keycode == trigger_prev) {
+                register_code(cmdish2); 
+            } else {
+                unregister_code(cmdish2);
             }
             register_code(tabish);
         } else {

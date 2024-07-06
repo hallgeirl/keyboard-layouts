@@ -24,7 +24,8 @@ void update_dual_swapper(
     uint16_t cmdish1,
     uint16_t cmdish2,
     uint16_t tabish,
-    uint16_t trigger,
+    uint16_t trigger_next,
+    uint16_t trigger_prev,
     uint16_t keycode,
     keyrecord_t *record
 );
