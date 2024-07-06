@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_GA2] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB , KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   ,                   KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL ,
-        KC_LSFT, KC_H   , KC_J   , KC_K   , KC_L   , KC_G   ,                   KC_H   , C_MTRCJ, C_MTRSK, C_MTLAL, KC_SCLN, KC_QUOT, 
+        KC_LSFT, KC_H   , KC_J   , KC_K   , KC_L   , KC_G   ,                   KC_H   , KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
         KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, _______, KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, LA_DEF, 
                                             _______, _______, _______, _______, _______, _______
     ),  
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),*/
     [_NAV] = LAYOUT(
         KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                   KC_F6,   KC_F7,   KC_F8,   KC_F9  , KC_F10 , KC_F11 ,
-        _______, TAB_L,   KC_TAB,  _______, SW_WIN,  KC_VOLU,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, _______, 
+        _______, TAB_L,   KC_TAB,  _______, _______, KC_VOLU,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  SW_WIN,  _______, 
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, 
         _______, KC_LGUI, OS_RALT, KC_MPRV, KC_MNXT, KC_MPLY, _______, _______, _______, _______, _______, _______, KC_DEL,  _______, 
                                             _______, _______, _______, _______, _______, _______
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 	[_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, EE_CLR, 
+        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_PSCR, EE_CLR, 
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, QK_BOOT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,       
                                             _______, _______, _______, _______, _______, _______
