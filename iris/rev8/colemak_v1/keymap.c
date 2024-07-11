@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, _______ ,
         LA_SYS,  KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , _______,
         LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
-                                            KC_ENT,  LA_NAV , KC_LSFT , KC_SPC , LA_SYM,  QK_REP
+                                            _______, LA_NAV , KC_LSFT , KC_SPC , LA_SYM,  QK_REP
     ),
 	[_GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
@@ -117,8 +117,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
         _______, TAB_L,   KC_TAB,  KC_BSPC, KC_DEL,  KC_VOLU,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  SW_WIN,  _______, 
-        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, 
-        _______, KC_LGUI, OS_RALT, KC_MPRV, KC_MNXT, KC_MPLY, _______, _______, _______, _______, _______, _______, KC_DEL,  _______, 
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, 
+        _______, KC_LGUI, OS_RALT, KC_MPRV, KC_MNXT, KC_MPLY, _______, _______, _______, _______, _______, _______, KC_ENT,  _______, 
                                             _______, _______, _______, _______, _______, _______
     ),
 	[_NUM] = LAYOUT(
