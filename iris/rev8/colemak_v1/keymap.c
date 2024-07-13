@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_PSCR, EE_CLR, 
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, QK_BOOT,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   _______, _______, _______, _______, _______, QK_BOOT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,       
                                             _______, _______, _______, _______, _______, _______
     )
@@ -108,6 +108,7 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
     case LA_SYM:
     case LA_NUM:
     case LA_NAV:
+    case LA_SYS:
         return true;
     default:
         return false;
@@ -119,6 +120,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     case LA_SYM:
     case LA_NAV:
     case LA_NUM:
+    case LA_SYS:
     case KC_LSFT:
     case OS_SHFT:
     case OS_CTRL:
