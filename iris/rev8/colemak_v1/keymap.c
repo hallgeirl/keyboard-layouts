@@ -7,6 +7,7 @@
 #define LA_SYM MO(_SYM)
 #define LA_NAV MO(_NAV)
 #define LA_NUM MO(_NUM)
+#define LA_FUN MO(_FUN)
 #define LA_GA1 DF(_GA1)
 #define LA_GA2 MO(_GA2)
 #define LA_SYS MO(_SYS)
@@ -58,6 +59,7 @@ enum layers {
     _SYM,
     _NAV,
     _NUM,
+    _FUN,
     _SYS
 };
 
@@ -99,9 +101,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 	[_NUM] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
-        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, 
-        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_F12,                    KC_F11,  _______, _______, _______, _______, _______,
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, 
+        _______, _______, _______, KC_BSPC, KC_DEL,  _______,                   _______, _______, _______, _______, _______, _______, 
+        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                            _______, _______, _______, _______, _______, _______
+    ),
+    [_FUN] = LAYOUT(
+        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, KC_F12,                    KC_F11,  _______, _______, _______, _______, _______,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, 
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),
 	[_SYS] = LAYOUT(
@@ -120,6 +129,7 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
     case LA_SYM:
     case LA_NUM:
+    case LA_FUN:
     case LA_NAV:
     case LA_SYS:
         return true;
@@ -133,6 +143,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     case LA_SYM:
     case LA_NAV:
     case LA_NUM:
+    case LA_FUN:
     case LA_SYS:
     case KC_LSFT:
     case OS_SHFT:
@@ -256,13 +267,17 @@ void keyboard_post_init_user(void) {
 
 void set_rgblight_by_layer(uint32_t layer) {
         switch (layer) {
-            case _DEF:
-                break;            
             case _SYS:
                 rgb_matrix_set_color_all(RGB_RED);
                 break;
-            default:
+            case _GA1:
+            case _GA2:
+            case _SYM:
+            case _NAV:
+            case _NUM:
                 rgb_matrix_set_color(layer_leds[layer], RGB_RED);
+                break;
+            default:
                 break;
         }
 }
@@ -308,9 +323,9 @@ bool rgb_matrix_indicators_user(void) {
     return false;
 }
 
-/*layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _SYM, _NAV, _NUM);
-}*/
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _SYM, _NAV, _FUN);
+}
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
