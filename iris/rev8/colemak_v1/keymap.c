@@ -16,43 +16,12 @@
 #define LA_GA1 DF(_GA1)
 #define LA_GA2 MO(_GA2)
 #define LA_SYS MO(_SYS)
-#define MT_SENT MT(MOD_LSFT, KC_ENT)
 
 
 // Tap-hold config (see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
 #define TH_SCLN LT(0, KC_SCLN) // å
 #define TH_O LT(0, KC_O)       // ø
 #define TH_QUOT LT(0, KC_QUOT) // æ
-
-// Base layer mods
-#define C_MTLAW MT(MOD_LALT,KC_W)
-#define C_MTLGF MT(MOD_LGUI,KC_F)
-#define C_MTLCP MT(MOD_LCTL,KC_P)
-#define C_MTRCL MT(MOD_RCTL,KC_L)
-#define C_MTRGU MT(MOD_RGUI,KC_U)
-#define C_MTLAY MT(MOD_LALT,KC_Y)
-
-#define C_MTLAR MT(MOD_LALT,KC_R)
-#define C_MTLSS MT(MOD_LSFT,KC_S)
-#define C_MTLCT MT(MOD_LCTL,KC_T)
-#define C_MTRCN MT(MOD_RCTL,KC_N)
-#define C_MTRSE MT(MOD_RSFT,KC_E)
-#define C_MTLAI MT(MOD_LALT,KC_I)
-
-// Game layer home row mods
-#define C_MTRCJ MT(MOD_RCTL,KC_J)
-#define C_MTRSK MT(MOD_RSFT,KC_K)
-#define C_MTLAL MT(MOD_LALT,KC_L)
-
-// Symbol layer
-#define C_MTRC5 MT(MOD_RCTL,KC_P5)
-#define C_MTRS6 MT(MOD_RSFT,KC_P6)
-#define CTLLEFT C(KC_LEFT)
-#define CTLRGHT C(KC_RIGHT)
-
-// Nav layer home row mods
-#define C_MTCMN MT(MOD_RCTL,KC_MNXT)
-#define C_MTCVU MT(MOD_RSFT,KC_VOLU)
 
 #define TAB_L S(KC_TAB)
 
@@ -85,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, _______ ,
         LA_SYS,  KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , _______,
         LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
-                                            LA_NUM,  LA_NAV , KC_LSFT , KC_SPC , LA_SYM,  QK_REP
+                                            LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  QK_REP
     ),
 	[_GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,

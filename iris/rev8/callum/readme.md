@@ -1,1 +1,0 @@
-See https://github.com/callum-oakley/qmk_firmware/blob/master/users/callum/readme.md
