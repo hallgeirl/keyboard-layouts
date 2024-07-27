@@ -37,17 +37,26 @@ enum keycodes {
 enum combos {
   CMB_ENT,
   CMB_QUOT,
-  CMB_MINS
+  CMB_MINS,
+  CMB_AE,
+  CMB_OSLASH,
+  CMB_ARING
 };
 
 const uint16_t PROGMEM ent_combo[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM quot_combo[] = {KC_I, KC_O, COMBO_END};
 const uint16_t PROGMEM mins_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM ae_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM oslash_combo[] = {KC_L, KC_U, COMBO_END};
+const uint16_t PROGMEM aring_combo[] = {KC_W, KC_F, COMBO_END};
 
 combo_t key_combos[] = {
   [CMB_ENT] = COMBO(ent_combo, KC_ENT),
   [CMB_QUOT] = COMBO(quot_combo, KC_QUOT),
   [CMB_MINS] = COMBO(mins_combo, KC_MINS),
+  [CMB_AE] = COMBO(ae_combo, RALT(KC_Z)),
+  [CMB_OSLASH] = COMBO(oslash_combo, RALT(KC_L)),
+  [CMB_ARING] = COMBO(aring_combo, RALT(KC_W)),
 };
 
 // Layers
