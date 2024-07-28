@@ -77,8 +77,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , _______,
         _______, KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, _______,
         LA_SYS,  KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , _______,
-        LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, _______,
-                                            LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  QK_REP
+        LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, QK_REP,
+                                            LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  LA_FUN
     ),
 	[_GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
@@ -175,6 +175,10 @@ oneshot_state os_ctrl_state = os_up_unqueued;
 oneshot_state os_alt_state = os_up_unqueued;
 oneshot_state os_ralt_state = os_up_unqueued;
 oneshot_state os_cmd_state = os_up_unqueued;
+
+/*layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _SYM, _NAV, _FUN);
+}*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /*
@@ -330,10 +334,6 @@ bool rgb_matrix_indicators_user(void) {
 
     set_current_layer_rgb();
     return false;
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _SYM, _NAV, _FUN);
 }
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
