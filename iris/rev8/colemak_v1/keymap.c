@@ -74,10 +74,10 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEF] = LAYOUT(
-        _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , _______,
-        _______, KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, _______,
-        LA_SYS,  KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , _______,
-        LA_GA1 , KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, QK_REP,
+        KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
+        KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
+        KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
+        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , LA_GA1,  LA_SYS,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT,
                                             LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  LA_FUN
     ),
 	[_GA1] = LAYOUT(
@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______, _______, _______, _______
     ),
     [_SYM] = LAYOUT(
-        KC_GRV , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______, 
-        _______, QK_GESC, KC_LABK, KC_RABK, _______, KC_DOT ,                   KC_AMPR, KC_DQUO, KC_LPRN, KC_RPRN, KC_PERC, _______,
+        _______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______, 
+        _______, QK_GESC, KC_LABK, KC_RABK, KC_GRV,  KC_DOT ,                   KC_AMPR, KC_DQUO, KC_LPRN, KC_RPRN, KC_PERC, _______,
         _______, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL , KC_HASH,                   KC_PIPE, KC_QUOT, KC_LBRC, KC_RBRC, KC_AT,   _______,
         _______, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, _______, _______, _______, KC_TILD, KC_DLR , KC_LCBR, KC_RCBR, KC_UNDS, _______,
                                             _______, _______, _______, _______, _______, _______
@@ -259,7 +259,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 /*
   RGB config
 */
-
+#define RGB_CUSTOM_RED 0x01, 0x00, 0x00
 const int led_count = RGB_MATRIX_LED_COUNT;
 int       layer_leds[]    = {0/*DEF*/, 2/*GA1*/, 3/*GA2*/, 5/*SYM*/, 6/*NAV*/, 8/*NUM*/};
 const int l_gui_led = 16,
@@ -281,7 +281,7 @@ void keyboard_post_init_user(void) {
 void set_rgblight_by_layer(uint32_t layer) {
         switch (layer) {
             case _SYS:
-                rgb_matrix_set_color_all(RGB_RED);
+                rgb_matrix_set_color_all(RGB_CUSTOM_RED);
                 break;
             case _GA1:
             case _GA2:
