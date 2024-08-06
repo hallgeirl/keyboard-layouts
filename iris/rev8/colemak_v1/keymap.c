@@ -259,6 +259,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 /*
   RGB config
 */
+#ifdef RGB_MATRIX_ENABLE
 #define RGB_CUSTOM_RED 0x01, 0x00, 0x00
 const int led_count = RGB_MATRIX_LED_COUNT;
 int       layer_leds[]    = {0/*DEF*/, 2/*GA1*/, 3/*GA2*/, 5/*SYM*/, 6/*NAV*/, 8/*NUM*/};
@@ -335,6 +336,7 @@ bool rgb_matrix_indicators_user(void) {
     set_current_layer_rgb();
     return false;
 }
+#endif
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
