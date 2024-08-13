@@ -8,4 +8,3 @@ RGB_MATRIX_MAXIMUM_BRIGHTNESS = 115
 
 SRC += oneshot.c
 SRC += swapper.c
-SRC += layout_common.c
