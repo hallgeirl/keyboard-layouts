@@ -120,3 +120,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_MODS_ENABLE
 #define COMBO_TERM 40
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD

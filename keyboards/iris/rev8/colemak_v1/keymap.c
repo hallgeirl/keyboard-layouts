@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEF] = LAYOUT(
         KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
-        KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , LT(_NUM, KC_O)   , KC_QUOT,
+        KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
         KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , LA_GA1,  LA_SYS,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT,
                                             LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  LA_FUN
     ),
@@ -128,7 +128,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   KC_F11,  KC_F4,   KC_F5,   KC_F6,   _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
                                             _______, _______, _______, _______, _______, _______
-    ),	[_SYS] = LAYOUT(
+    ),	
+    [_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_PSCR, EE_CLR, 
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   _______, _______, _______, _______, _______, QK_BOOT,
@@ -263,6 +264,37 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 }
 
 /*
+  Caps word config
+*/
+bool caps_word_active = false;
+void caps_word_set_user(bool active) {
+    caps_word_active = active;
+}
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+        case RALT(KC_L):
+        case RALT(KC_W):
+        case RALT(KC_Z):
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+/*
   RGB config
 */
 #ifdef RGB_MATRIX_ENABLE
@@ -329,7 +361,7 @@ bool rgb_matrix_indicators_user(void) {
     if (isRAlt) {
         rgb_matrix_set_color(l_ralt_led, RGB_RED);
     }
-    if (isShift) {
+    if (isShift || caps_word_active) {
         rgb_matrix_set_color(l_sft_led, RGB_RED);
         rgb_matrix_set_color(r_sft_led, RGB_RED);
     }

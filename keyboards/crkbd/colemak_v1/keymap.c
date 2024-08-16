@@ -240,6 +240,37 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 }
 
 /*
+  Caps word config
+*/
+bool caps_word_active = false;
+void caps_word_set_user(bool active) {
+    caps_word_active = active;
+}
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+        case RALT(KC_L):
+        case RALT(KC_W):
+        case RALT(KC_Z):
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+/*
   RGB config
 */
 #ifdef RGB_MATRIX_ENABLE
@@ -304,7 +335,7 @@ bool rgb_matrix_indicators_user(void) {
     if (isRAlt) {
         rgb_matrix_set_color(l_ralt_led, RGB_RED);
     }
-    if (isShift) {
+    if (isShift || caps_word_active) {
         rgb_matrix_set_color(l_sft_led, RGB_RED);
         rgb_matrix_set_color(r_sft_led, RGB_RED);
     }
