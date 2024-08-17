@@ -8,6 +8,7 @@
 #define LA_NAV MO(_NAV)
 #define LA_NUM MO(_NUM)
 #define LA_FUN MO(_FUN)
+#define LA_I3  LM(_I3, MOD_LGUI)
 #define LA_SYS MO(_SYS)
 
 
@@ -72,6 +73,7 @@ enum layers {
     _NAV,
     _NUM,
     _FUN,
+    _I3,
     _SYS
 };
 
@@ -106,6 +108,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______,                   KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),
+    q
+    [_I3] = LAYOUT(
+        _______, _______, _______, KC_BSPC, KC_DEL,  _______,                   _______, KC_7,    KC_8,    KC_9,    _______, _______,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   _______, KC_4,    KC_5,    KC_6,    _______, _______,
+        _______, _______, _______, _______, _______, _______,                   _______, KC_1,    KC_2,    KC_3,    _______, _______,
+                                            _______, _______, _______, _______, KC_0,    _______
+    ),	
 	[_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_PSCR, EE_CLR, 
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   _______, _______, _______, _______, _______, QK_BOOT,
@@ -123,6 +132,7 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
     case LA_NUM:
     case LA_FUN:
     case LA_NAV:
+    case LA_I3:
     case LA_SYS:
         return true;
     default:

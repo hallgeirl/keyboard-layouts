@@ -10,6 +10,7 @@
 #define LA_FUN MO(_FUN)
 #define LA_GA1 DF(_GA1)
 #define LA_GA2 MO(_GA2)
+#define LA_I3  LM(_I3, MOD_LGUI)
 #define LA_SYS MO(_SYS)
 
 
@@ -76,6 +77,7 @@ enum layers {
     _NAV,
     _NUM,
     _FUN,
+    _I3,
     _SYS
 };
 
@@ -84,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
         KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
         KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , KC_QUOT,
-        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , LA_GA1,  LA_SYS,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, KC_LGUI,
+        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , LA_GA1,  LA_SYS,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
                                             LA_NUM,  LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  LA_FUN
     ),
 	[_GA1] = LAYOUT(
@@ -129,6 +131,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),	
+    [_I3] = LAYOUT(
+        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, KC_BSPC, KC_DEL,  _______,                   _______, KC_7,    KC_8,    KC_9,    _______, _______,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   _______, KC_4,    KC_5,    KC_6,    _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
+                                            _______, _______, _______, _______, KC_0,    _______
+    ),	
     [_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_PSCR, EE_CLR, 
@@ -147,6 +156,7 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
     case LA_NUM:
     case LA_FUN:
     case LA_NAV:
+    case LA_I3:
     case LA_SYS:
         return true;
     default:
