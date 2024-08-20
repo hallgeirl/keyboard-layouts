@@ -9,7 +9,7 @@ RGBLIGHT_ENABLE = no
 RGB_MATRIX_ENABLE = no
 CAPS_WORD_ENABLE = yes
 
-CONVERT_TO=<target>
+CONVERT_TO=helios
 
 SRC += oneshot.c
 SRC += swapper.c
