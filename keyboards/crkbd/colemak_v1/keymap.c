@@ -11,7 +11,7 @@
 #define LA_I3  LM(_I3, MOD_LGUI)
 #define LA_SYS MO(_SYS)
 
-#define TMUX C(KC_S)
+#define TMUX C(KC_B)
 
 // Tap-hold config (see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
 #define TH_SCLN LT(0, KC_SCLN) // å
