@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_NAV] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, TAB_L,   KC_TAB,  KC_BSPC, KC_DEL,  KC_VOLU,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  SW_WIN,  _______,
-        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, _______,
-        _______, KC_LGUI, OS_RALT, KC_MPRV, KC_MNXT, KC_MPLY,                   _______, _______, _______, _______, _______, _______,
+        _______, TAB_L,   KC_TAB,  KC_BSPC, KC_DEL,  _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  SW_WIN,  _______,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, OS_RALT,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, _______,
+        _______, C(KC_Z), C(KC_X), C(KC_C), _______, C(KC_V),                   _______, _______, _______, _______, _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),
   	[_NUM] = LAYOUT(
@@ -109,9 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FUN] = LAYOUT(
         KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-        _______, _______, _______, KC_BSPC, KC_DEL,  _______,                   KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PERC, _______,
-        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______,                   KC_F11,  KC_F4,   KC_F5,   KC_F6,   _______, _______,
-        _______, _______, _______, _______, _______, _______,                   KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
+        _______, _______, _______, KC_BSPC, KC_DEL,  KC_VOLU,                   KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PERC, _______,
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD,                   KC_F11,  KC_F4,   KC_F5,   KC_F6,   _______, _______,
+        _______, _______, _______, KC_MPRV, KC_MNXT, KC_MPLY,                   KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),	
     [_I3] = LAYOUT(
@@ -129,15 +129,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______, _______, _______, _______
     )
 };
-
-void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  debug_matrix=true;
-  //debug_keyboard=true;
-  //debug_mouse=true;
-}
-
 
 /*
     Callum's one-shot and swapper implementations (with some modifications)
@@ -185,9 +176,9 @@ oneshot_state os_alt_state = os_up_unqueued;
 oneshot_state os_ralt_state = os_up_unqueued;
 oneshot_state os_cmd_state = os_up_unqueued;
 
-/*layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _SYM, _NAV, _FUN);
-}*/
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _SYM, _NAV, _SYS);
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /*

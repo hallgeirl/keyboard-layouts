@@ -10,7 +10,7 @@
     },
     "development_board": "promicro_rp2040",
     "features": {
-        "bootmagic": false,
+        "bootmagic": true,
         "command": false,
         "console": false,
         "extrakey": true,
