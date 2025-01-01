@@ -11,6 +11,10 @@
 #define LA_I3  LM(_I3, MOD_LGUI)
 #define LA_SYS MO(_SYS)
 
+#define NO_Ø RALT(KC_L)
+#define NO_Å RALT(KC_W)
+#define NO_Æ RALT(KC_Z)
+
 #define TMUX C(KC_B)
 
 // Tap-hold config (see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
@@ -66,6 +70,7 @@ combo_t key_combos[] = {
   [CMB_ESC] = COMBO(esc_combo, KC_ESC)
 };
 
+
 // Layers
 
 enum layers {
@@ -80,57 +85,62 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEF] = LAYOUT(
-        KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , _______, _______, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
-        KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   , _______, _______, KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
-        KC_LALT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , _______, _______, KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
-        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , _______, _______, KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
-                          _______, _______, _______, _______, KC_LSFT, KC_SPC,  _______, _______, _______, _______,
-                                                     LA_NUM,  LA_NAV , LA_SYM,  LA_FUN
-    )/*,
+        KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_VOLU, KC_HOME, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
+        KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   , KC_VOLD, KC_PGUP, KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
+        KC_LALT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_MPLY, KC_PGDN, KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
+        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_MNXT, KC_END,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
+                          NO_Æ,    NO_Å,    KC_BSPC, LA_NAV,  KC_LCTL, KC_LALT, LA_SYM,  LA_FUN,  NO_Ø,    KC_MINS,
+                                                     KC_DEL,  KC_LSFT, KC_SPC,  KC_ENT
+    ),
     [_SYM] = LAYOUT(
         _______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), _______, _______, S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______,
         _______, QK_GESC, KC_LABK, KC_RABK, KC_GRV,  KC_DOT , _______, _______, KC_AMPR, KC_DQUO, KC_LPRN, KC_RPRN, KC_PERC, _______,
         _______, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL , KC_HASH, _______, _______, KC_PIPE, KC_QUOT, KC_LBRC, KC_RBRC, KC_AT,   _______,
         _______, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, _______, _______, _______, KC_TILD, KC_DLR , KC_LCBR, KC_RCBR, KC_UNDS, _______,
-                          _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______,
-                                                     _______, _______, _______,  _______, _______                  
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______
     ),
-
+    
     [_NAV] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, TAB_L,   KC_TAB,  KC_BSPC, KC_DEL,  _______, _______, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  SW_WIN,  _______,
-        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, OS_RALT, _______, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, _______,
-        _______, C(KC_Z), C(KC_X), C(KC_C), _______, C(KC_V), _______, _______, _______, _______, _______, _______, _______, _______,
-                                            _______, _______, _______, _______, _______, _______
+        _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______        
     ),
   	[_NUM] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, KC_BSPC, KC_DEL,  _______, _______, _______, _______, KC_7,    KC_8,    KC_9,    _______, _______,
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, _______, KC_4,    KC_5,    KC_6,    _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
-                                            _______, _______, _______, _______, KC_0,    _______
+        _______, _______, _______, _______, _______, _______, _______, _______, KC_0,    KC_1,    KC_2,    KC_3,    _______, _______,
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______
     ),
     [_FUN] = LAYOUT(
         KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
         _______, _______, _______, KC_BSPC, KC_DEL,  KC_VOLU, _______, _______, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PERC, _______,
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, KC_VOLD, _______, _______, KC_F11,  KC_F4,   KC_F5,   KC_F6,   _______, _______,
         _______, _______, _______, KC_MPRV, KC_MNXT, KC_MPLY, _______, _______, KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______, _______,
-                                            _______, _______, _______, _______, _______, _______
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______        
     ),	
     [_I3] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, KC_BSPC, KC_DEL,  _______, _______, _______, _______, KC_7,    KC_8,    KC_9,    _______, _______,
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, _______, KC_4,    KC_5,    KC_6,    _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
-                                            _______, _______, _______, _______, KC_0,    _______
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, KC_0        
     ),	
     [_SYS] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, EE_CLR, 
         _______, OS_CMD,  OS_ALT,  OS_SHFT, OS_CTRL, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                            _______, _______, _______, _______, _______, _______
-    )*/
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______        
+    )
 };
 
 /*
@@ -290,85 +300,13 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-/*
-  RGB config
-*/
-#ifdef RGB_MATRIX_ENABLE
-#define RGB_CUSTOM_RED 0x01, 0x00, 0x00
-const int led_count = RGB_MATRIX_LED_COUNT;
-int       layer_leds[]    = {0/*DEF*/, 5/*SYM*/, 6/*NAV*/, 8/*NUM*/};
-const int l_gui_led = 16,
-          l_alt_led = 17,
-          l_sft_led = 18,
-          l_ctl_led = 19,
-          l_ralt_led = 25;
-
-const int r_gui_led = 50,
-          r_alt_led = 51,
-          r_sft_led = 52,
-          r_ctl_led = 53;
 
 void keyboard_post_init_user(void) {
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+  #ifdef CONSOLE_ENABLE 
+  debug_enable=true;
+  debug_matrix=true;
+  #endif
 }
-
-void set_rgblight_by_layer(uint32_t layer) {
-        switch (layer) {
-            case _SYS:
-                rgb_matrix_set_color_all(RGB_CUSTOM_RED);
-                break;
-            case _SYM:
-            case _NAV:
-            case _NUM:
-                rgb_matrix_set_color(layer_leds[layer], RGB_RED);
-                break;
-            default:
-                break;
-        }
-}
-
-void set_current_layer_rgb(void) {
-    set_rgblight_by_layer(get_highest_layer(layer_state | default_layer_state));
-}
-
-bool rgb_matrix_indicators_user(void) {
-    rgb_matrix_set_color_all(0,0,0);
-    uint8_t mods                = get_mods();
-    //uint8_t oneshot_mods        = get_oneshot_mods();
-    //uint8_t oneshot_locked_mods = get_oneshot_locked_mods();
-
-    bool isShift = mods & MOD_MASK_SHIFT;// || oneshot_mods & MOD_MASK_SHIFT || oneshot_locked_mods & MOD_MASK_SHIFT;
-    bool isCtrl  = mods & MOD_MASK_CTRL;// || oneshot_mods & MOD_MASK_CTRL || oneshot_locked_mods & MOD_MASK_CTRL;
-    bool isLAlt  = mods & MOD_BIT(KC_LALT);// || oneshot_mods & MOD_MASK_ALT || oneshot_locked_mods & MOD_MASK_ALT;
-    bool isRAlt  = mods & MOD_BIT(KC_RALT);// || oneshot_mods & MOD_MASK_ALT || oneshot_locked_mods & MOD_MASK_ALT;;// || oneshot_mods & MOD_MASK_ALT || oneshot_locked_mods & MOD_MASK_ALT;
-    bool isGui   = mods & MOD_MASK_GUI;// || oneshot_mods & MOD_MASK_GUI || oneshot_locked_mods & MOD_MASK_GUI;
-
-    if (isGui) {
-        rgb_matrix_set_color(l_gui_led, RGB_RED);
-        rgb_matrix_set_color(r_gui_led, RGB_RED);
-    }
-    if (isLAlt) {
-        rgb_matrix_set_color(l_alt_led, RGB_RED);
-        rgb_matrix_set_color(r_alt_led, RGB_RED);
-    }
-    if (isRAlt) {
-        rgb_matrix_set_color(l_ralt_led, RGB_RED);
-    }
-    if (isShift || caps_word_active) {
-        rgb_matrix_set_color(l_sft_led, RGB_RED);
-        rgb_matrix_set_color(r_sft_led, RGB_RED);
-    }
-    if (isCtrl) {
-        rgb_matrix_set_color(l_ctl_led, RGB_RED);
-        rgb_matrix_set_color(r_ctl_led, RGB_RED);
-    }
-    
-
-    set_current_layer_rgb();
-    return false;
-}
-#endif
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
