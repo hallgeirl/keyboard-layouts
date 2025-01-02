@@ -4,6 +4,8 @@
 #include "swapper.h"
 
 #define LA_DEF DF(_DEF)
+#define LA_GA1 DF(_GA1)
+#define LA_GA2 MO(_GA2)
 #define LA_SYM MO(_SYM)
 #define LA_NAV MO(_NAV)
 #define LA_NUM MO(_NUM)
@@ -75,6 +77,8 @@ combo_t key_combos[] = {
 
 enum layers {
     _DEF,
+    _GA1,
+    _GA2,
     _SYM,
     _NAV,
     _NUM,
@@ -85,12 +89,28 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEF] = LAYOUT(
-        KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_VOLU, KC_HOME, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_BSPC,
+        KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_VOLU, KC_HOME, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , LA_GA1,
         KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   , KC_VOLD, KC_PGUP, KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
         KC_LALT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_MPLY, KC_PGDN, KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
         KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_MNXT, KC_END,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
                           NO_Æ,    NO_Å,    KC_BSPC, LA_NAV,  KC_LCTL, KC_LALT, LA_SYM,  LA_FUN,  NO_Ø,    KC_MINS,
                                                      KC_DEL,  KC_LSFT, KC_SPC,  KC_ENT
+    ),
+	  [_GA1] = LAYOUT(
+        KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , _______, _______, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , LA_GA2,
+        KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   , _______, _______, KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL,
+        KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   , _______, _______, KC_H   , KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+        KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , LA_GA2,  KC_HOME, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, LA_DEF,
+                          _______, _______, KC_ENT,  KC_LALT, KC_SPC,  KC_LGUI, LA_NAV , KC_RALT, _______, _______,
+                                                     _______, _______, _______, _______
+    ),
+    [_GA2] = LAYOUT(
+        KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , _______, _______, KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11,
+        KC_TAB , KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , _______, _______, KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_DEL ,
+        KC_LSFT, KC_H   , KC_J   , KC_K   , KC_L   , KC_G   , _______, _______, KC_H   , KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+        KC_LCTL, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, _______, KC_END,  KC_N   , KC_M   , KC_COMM, KC_DOT,  KC_SLSH, LA_DEF, 
+                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                                     _______, _______, _______, _______
     ),
     [_SYM] = LAYOUT(
         _______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), _______, _______, S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______,
