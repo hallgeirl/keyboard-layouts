@@ -91,10 +91,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEF] = LAYOUT(
         KC_ESC,  KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_VOLU, KC_HOME, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , LA_GA1,
         KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   , KC_VOLD, KC_PGUP, KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
-        KC_LALT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_MPLY, KC_PGDN, KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
+        KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   , KC_MPLY, KC_PGDN, KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
         KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   , KC_MNXT, KC_END,  KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
-                          NO_Æ,    NO_Å,    KC_BSPC, LA_NAV,  KC_LCTL, KC_LALT, LA_SYM,  LA_FUN,  NO_Ø,    KC_MINS,
-                                                     KC_DEL,  KC_LSFT, KC_SPC,  KC_ENT
+                          NO_Æ,    NO_Å,    KC_LCTL, LA_NAV,  KC_LSFT, KC_SPC,  LA_SYM,  LA_FUN,  NO_Ø,    KC_MINS,
+                                                     KC_BSPC, KC_DEL,  KC_LALT, KC_ENT
     ),
 	  [_GA1] = LAYOUT(
         KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , _______, _______, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , LA_GA2,
