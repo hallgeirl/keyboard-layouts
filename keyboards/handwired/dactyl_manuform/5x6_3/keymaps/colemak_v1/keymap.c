@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q   , KC_W,    KC_F,    KC_P,    KC_B   ,                   KC_J   , KC_L,    KC_U   , KC_Y,    KC_SCLN, KC_DEL,
         KC_LSFT, KC_A   , KC_R   , KC_S   , KC_T   , KC_G   ,                   KC_M   , KC_N   , KC_E   , KC_I   , KC_O   , TMUX,
         KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_D   , KC_V   ,                   KC_K   , KC_H   , KC_COMM, KC_DOT , KC_SLSH, LA_I3,
-                                            KC_BSPC, LA_NAV , KC_LSFT, KC_SPC , LA_SYM,  LA_FUN
+                                            KC_BSPC, LA_NAV , KC_SPC , KC_RSFT, LA_SYM,  LA_FUN
     ),
     [_SYM] = LAYOUT(
         _______, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                   S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______,
